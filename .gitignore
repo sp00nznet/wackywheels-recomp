@@ -1,0 +1,18 @@
+# Your copy of the game (Wacky Wheels (c) 1994 Beavis Soft / Apogee). Never committed.
+game/
+*.exe
+*.EXE
+*.DAT
+*.CFG
+*.PCK
+WW_REGUP.*
+
+# Lifted output and analysis: derived from the game binary, never distributed
+src/recomp/gen/
+analysis/
+work/
+
+# Builds
+build/
+build-*/
+__pycache__/

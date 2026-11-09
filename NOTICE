@@ -1,0 +1,14 @@
+Wacky Wheels recomp
+
+run_lift.py and build.cmd are derived from the Theme Park recomp
+(https://github.com/sp00nznet/themepark-recomp); the host is pcrecomp's dos32
+(https://github.com/sp00nznet/pcrecomp). Both MIT.
+
+tools/unpack_regup.py ports blast.c, (c) 2003-2012 Mark Adler, zlib licence:
+  This software is provided 'as-is', without any express or implied warranty.
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the restrictions in the zlib licence.
+
+Wacky Wheels is (c) 1994 Beavis Soft and Apogee Software. No part of the game
+is included.
