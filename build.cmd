@@ -2,7 +2,7 @@
 rem Configure and build the 64-bit host with clang-cl + Ninja.
 rem Needs Visual Studio 2022 (any edition, or the Build Tools) with the C++ x64
 rem tools, LLVM (clang-cl), CMake and Ninja. PCRECOMP names the pcrecomp
-rem checkout to build against (default ..\tools).
+rem checkout to build against (default ..\pcrecomp).
 setlocal
 rem vswhere goes on PATH rather than in quotes: a quoted path with "(x86)" in
 rem it breaks inside for /f.

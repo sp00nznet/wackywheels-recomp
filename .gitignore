@@ -16,3 +16,9 @@ work/
 build/
 build-*/
 __pycache__/
+
+# Made by Setup.cmd, and run output
+setup.log
+/*.lnk
+*.mp4
+*.bmp
