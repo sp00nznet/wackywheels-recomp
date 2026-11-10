@@ -9,7 +9,7 @@
 # a failure resumes. Everything it does goes to setup.log. Nothing of the game
 # is downloaded: it comes from your CD (or an image or copy of it).
 #
-#   -GameDir <drive, folder or .iso>   skip the question (-Game works too)
+#   -GameDir <drive, folder, .iso or .cue>   skip the question (-Game works too)
 #   -Yes                               answer yes to every install question
 #
 # The toolkit is ..\pcrecomp (PCRECOMP overrides it). Under recomp-launcher
@@ -146,18 +146,28 @@ if ((Test-Path 'game\WW.EXE') -and (Test-Path 'game\WACKY.DAT') -and -not $Force
       if (Test-Path (Join-Path $d.Root 'WW_REGUP._1')) { $Game = $d.Root; Say "  Found the CD in $Game"; break }
     }
   }
-  if (-not $Game -and $Yes) { Fail "The CD wasn't found. Give its drive, folder or .iso with -GameDir." }
+  if (-not $Game -and $Yes) { Fail "The CD wasn't found. Give its drive, folder, .iso or .cue with -GameDir." }
   while (-not $Game) {
-    $Game = (Read-Host "  Where is the CD? Its drive (E:\), a folder holding WW_REGUP._1 and ._2, or an .iso").Trim('"', ' ')
+    $Game = (Read-Host "  Where is the CD? Its drive (E:\), a folder holding WW_REGUP._1 and ._2, an .iso or a .cue").Trim('"', ' ')
   }
+  # A .cue/.bin image becomes an .iso (its data track), which Windows mounts.
+  if ($Game -match '\.cue$') {
+    New-Item -ItemType Directory -Force 'work' | Out-Null
+    if (-not (Test-Path 'work\disc.iso') -or $Force) { Run "Converting $(Split-Path -Leaf $Game) to work\disc.iso" ($pyargs + @('tools\cue2iso.py', $Game, 'work\disc.iso')) }
+    $Game = Join-Path $Root 'work\disc.iso'
+  }
+  $img = $null
   if ($Game -match '\.iso$') {
     Say "  Mounting $Game"
-    $img = Mount-DiskImage -ImagePath (Resolve-Path $Game).Path -PassThru
+    $iso = (Resolve-Path $Game).Path
+    $img = Get-DiskImage -ImagePath $iso
+    if (-not $img.Attached) { $img = Mount-DiskImage -ImagePath $iso -PassThru }
     $Game = (Get-Volume -DiskImage $img).DriveLetter + ':\'
   }
   $arc = Get-ChildItem $Game -Recurse -Depth 2 -Filter 'WW_REGUP._1' -ErrorAction SilentlyContinue | Select-Object -First 1
   if (-not $arc) { Fail "WW_REGUP._1 is not in $Game. It is on the Wacky Wheels CD rerelease, next to WW_REGUP._2." }
   Run "Unpacking WW_REGUP._1 and ._2" ($pyargs + @('tools\unpack_regup.py', $arc.DirectoryName, 'game'))
+  if ($img) { Dismount-DiskImage -ImagePath $img.ImagePath | Out-Null }
 }
 if (-not (Test-Path 'game\WACKY.CFG') -or $Force) { Run "Writing WACKY.CFG (no music, no effects)" ($pyargs + @('tools\make_cfg.py')) }
 

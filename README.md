@@ -28,7 +28,7 @@ following its shared house style (layout, CLI, `run_lift.py` + `build.cmd`,
 | Racing, input | not yet tried |
 | Headless mode | `--headless` with `--seconds`, `--shot` and `--keys`; `--record out.mp4` does not exist yet ([ROADMAP.md](ROADMAP.md)) |
 | Conformance harness | not yet ([ROADMAP.md](ROADMAP.md)) |
-| `Setup.cmd` quick start, launcher | written; not yet run end to end on a clean machine with the CD |
+| `Setup.cmd` quick start | ✅ run end to end from a fresh clone with the Redump `.cue`/`.bin` of the CD rerelease: convert, mount, unpack, lift, build, shortcut; a rerun resumes. The launcher is not yet tested |
 
 ## Screenshots
 
@@ -48,7 +48,7 @@ does.
 ## Getting Started
 
 You need **your own Wacky Wheels CD rerelease** (the one with the installer
-archives `WW_REGUP._1` and `WW_REGUP._2`), an `.iso` of it, or a folder holding
+archives `WW_REGUP._1` and `WW_REGUP._2`), an `.iso` or `.cue`/`.bin` of it, or a folder holding
 those two files. Nothing is downloaded for you.
 
 ### Quick start: Setup.cmd
@@ -61,7 +61,8 @@ It checks for Python 3.10+, the `pefile` and `capstone` packages, the pcrecomp
 toolkit and Visual Studio 2022 with the C++ tools and clang-cl, and **asks**
 before installing any of them, saying what and how big. It finds the CD in your
 drives (by `WW_REGUP._1` at its root), or asks where it is (a drive, a folder,
-or an `.iso`, which it mounts; `Setup.cmd -GameDir E:\` skips the question,
+an `.iso`, which it mounts, or a `.cue`, whose data track it turns into
+`work\disc.iso` first; `Setup.cmd -GameDir E:\` skips the question,
 `-Yes` answers yes to every install). Then it unpacks the game into `game\`,
 writes a silent `WACKY.CFG`, lifts `WW.EXE` and builds `build\wackywheels.exe`.
 A rerun skips the finished steps. If it stops, it says why in one sentence, and
