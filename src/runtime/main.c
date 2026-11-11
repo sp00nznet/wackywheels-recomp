@@ -10,7 +10,7 @@
  *               [--keys "S:key,S:key,..."] [--log]
  *
  * --keys presses a key at S seconds of guest time: enter space esc up down
- * left right ctrl alt shift tab y n f1..f10, 1..9, a..z.
+ * left right ctrl alt shift tab y n f1..f10, 1..9, a..z; key+S holds it S seconds.
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -43,6 +43,7 @@ static int key_code(const char* k) {
         {"tab",0x0F},{"y",0x15},{"n",0x31},{"f1",0x3B},{"f2",0x3C},{"f3",0x3D},{"f4",0x3E},
         {"f5",0x3F},{"f6",0x40},{"f7",0x41},{"f8",0x42},{"f9",0x43},{"f10",0x44}};
     for (unsigned i = 0; i < sizeof t / sizeof t[0]; i++) if (!_stricmp(k, t[i].n)) return t[i].sc;
+    if (k[0] == '0' && k[1] == 'x') return (int)strtol(k, NULL, 16);   /* a raw scancode */
     if (k[0] >= '1' && k[0] <= '9' && !k[1]) return 0x02 + (k[0] - '1');
     if (k[0] && !k[1]) {
         static const char row[] = "qwertyuiop\0\0\0\0asdfghjkl\0\0\0\0\0zxcvbnm";
@@ -88,10 +89,12 @@ static void on_retrace(void) {
     while (ishot < nshots && t >= shots[ishot].at) write_bmp(shots[ishot++].what);
     if (held_key && t >= release_at) { dos32_key(held_key, 0); held_key = 0; }
     while (!held_key && ikey < nkeys && t >= keys[ikey].at) {
+        char* hold = strchr(keys[ikey].what, '+');   /* key+S: hold it S seconds */
+        double dur = hold ? (*hold = 0, atof(hold + 1)) : 0.15;
         int sc = key_code(keys[ikey].what);
         printf("[keys] %.1fs %s\n", t, keys[ikey].what);
         ikey++;
-        if (sc) { dos32_key(sc, 1); held_key = sc; release_at = t + 0.15; }
+        if (sc) { dos32_key(sc, 1); held_key = sc; release_at = t + dur; }
     }
     if (seconds > 0 && t >= seconds) { printf("[ww] %.0f s: done\n", seconds); dos32_quit = 1; }
 }

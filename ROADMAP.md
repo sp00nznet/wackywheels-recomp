@@ -1,9 +1,9 @@
 # Roadmap
 
 ## Next
-- Mode X in pcrecomp's dos32 ([docs/lifting.md](docs/lifting.md), "Next"),
-  then the menus and a race. A toolkit change, through a pcrecomp PR.
-- Input: the race, the menus.
+- Merge pcrecomp's `pcrecomp-dos32-modex` (Mode X) into `main`.
+- The skyline does not scroll when the kart turns; find out what draws it.
+- A whole race to the finish, the other cups, two-player split screen.
 - A conformance harness (REPO_RULES section 9): boot, title, menus, a race
   start, as milestones with a pass count and a baseline, in the shape of
   Theme Park's `tools/conformance.py` + `tools/qa.cmd`. Without the game it

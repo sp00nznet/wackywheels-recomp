@@ -14,7 +14,7 @@ following its shared house style (layout, CLI, `run_lift.py` + `build.cmd`,
 `Setup.cmd` quick start, launcher). The lift driver and the build come from the
 [Theme Park recomp](https://github.com/sp00nznet/themepark-recomp).
 
-## Status: **v0.1.0, early alpha. It boots and runs its menus, but the screen is not right yet.**
+## Status: **v0.2.0, alpha. It races: the menus, the track select and a race, driven with the keyboard.**
 
 | Stage | State |
 |---|---|
@@ -23,19 +23,20 @@ following its shared house style (layout, CLI, `run_lift.py` + `build.cmd`,
 | Lift (`run_lift.py`) | 2,342 functions, 0 errors |
 | Host (`build/wackywheels.exe`, 64-bit, clang-cl, pcrecomp `dos32`) | builds |
 | Config, start-up, the Beavis Soft logo, the title, the menus | ✅ run |
-| The screen | ❌ the game draws in Mode X (unchained VGA), which `dos32` does not have yet: every screen shows as four squashed copies |
+| The screen | ✅ Mode X (unchained VGA) in pcrecomp's `dos32`, branch `pcrecomp-dos32-modex` (not merged into `main` yet) |
 | Sound | off (`WACKY.CFG` says no music, no effects) |
-| Racing, input | not yet tried |
+| Racing, input | ✅ a Bronze Wheels race on track 1 with the keyboard (arrows, Ctrl fire, Alt hand-brake); the skyline does not scroll when turning yet |
 | Headless mode | `--headless` with `--seconds`, `--shot` and `--keys`; `--record out.mp4` does not exist yet ([ROADMAP.md](ROADMAP.md)) |
 | Conformance harness | not yet ([ROADMAP.md](ROADMAP.md)) |
 | `Setup.cmd` quick start | ✅ run end to end from a fresh clone with the Redump `.cue`/`.bin` of the CD rerelease: convert, mount, unpack, lift, build, shortcut; a rerun resumes. The launcher is not yet tested |
 
 ## Screenshots
 
-Real output of `build\wackywheels.exe --headless --shot`, showing where it is:
-the menus run, drawn without Mode X.
+Real output of `build\wackywheels.exe --headless --shot`:
 
-![Mode X, not yet: the screen as four squashed copies](docs/screenshots/modex-wip.png)
+![The start of a race](docs/screenshots/race.png)
+
+![Crossing the line into lap 1](docs/screenshots/race-lap1.png)
 
 ## What is not in this repo
 
@@ -123,6 +124,8 @@ app settings > App execution aliases*); a freshly installed Python not being on
 build\wackywheels.exe                                         # in a window
 build\wackywheels.exe --headless --seconds 20 --shot 15 menu.bmp
 build\wackywheels.exe --headless --seconds 30 --keys "8:enter,12:down,14:enter" --log
+rem a race: Enter through the menus, then hold accelerate (run at high priority on a busy machine)
+build\wackywheels.exe --headless --seconds 84 --keys "10:enter+0.3,13:enter+0.3,...,70:enter+0.3,71:up+20" --shot 72 race.bmp
 ```
 
 | Flag | |
@@ -131,7 +134,7 @@ build\wackywheels.exe --headless --seconds 30 --keys "8:enter,12:down,14:enter" 
 | `--headless` | no window |
 | `--seconds S` | quit after S seconds of guest time |
 | `--shot S FILE` | save the screen at S seconds (up to 16) |
-| `--keys "S:key,..."` | press a key at S seconds of guest time: `enter`, `space`, `esc`, `up`, `down`, ... |
+| `--keys "S:key,..."` | press a key at S seconds of guest time: `enter`, `space`, `esc`, `up`, `down`, ...; `key+S` holds it S seconds, `0x48` is a raw scancode |
 | `--log` | log the DOS host's calls |
 
 ## Building from source

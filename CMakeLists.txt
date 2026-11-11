@@ -21,7 +21,7 @@ add_executable(wackywheels ${GEN} src/recomp/gen/image_data.c
   ${PCRECOMP}/runtime/dos32/dos32.c src/runtime/main.c)
 target_include_directories(wackywheels PRIVATE src/recomp/gen
   ${PCRECOMP}/runtime/dos32 ${PCRECOMP}/runtime/recomp32)
-target_compile_definitions(wackywheels PRIVATE _CRT_SECURE_NO_WARNINGS RECOMP_YIELD_EVERY=256u)
+target_compile_definitions(wackywheels PRIVATE _CRT_SECURE_NO_WARNINGS RECOMP_YIELD_EVERY=256u RECOMP_DOS32_VGA)
 set_source_files_properties(${GEN} src/recomp/gen/image_data.c PROPERTIES
   COMPILE_OPTIONS "/w;-fno-strict-aliasing;-fwrapv;/O1")
 target_link_libraries(wackywheels PRIVATE winmm user32 gdi32)

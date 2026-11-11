@@ -26,15 +26,17 @@ The word at block 3 + 0x308 is the version and must be 250. Block 3 + 0x2E0
 and + 0x2DC are the music and effects devices, -1 for none.
 `tools/make_cfg.py` writes that.
 
-## Next: Mode X
+## Mode X
 
 The game switches the VGA to unchained mode and draws with the Map Mask, four
-pixels per byte address. `dos32` treats A000 as plain memory, so it has no
-planes. In the lifted code, memory is a plain dereference with no hook.
-Options, in pcrecomp:
-- a lift32 option that routes accesses to the video window, and
-  `rep stos`/`movs`, through planar logic (as `RECOMP_MEM_HOOK` does for
-  16-bit code), with a Mode X scanout in `dos32_frame`;
-- or catching the window with page protection.
+pixels per byte address, and copies through the latches (write mode 1). It is
+done in pcrecomp's `dos32` (branch `pcrecomp-dos32-modex`): the window at
+A0000 holds one plane at a time and is swapped on Map Mask and Read Map
+writes; latch copies come through `recomp_rep_movs`, which the build opts into
+with `RECOMP_DOS32_VGA`; the scanout follows the CRTC start address.
 
-Many DOS/4GW games of the period draw this way, so this belongs in the toolkit.
+## Keys
+
+`WACKY.CFG` block 2 (0x46B6D8) is the keyboard table: (scancode, state) pairs,
+player 1's six first. A zeroed config has no keys and the kart never moves, so
+`tools/make_cfg.py` writes SETUP's arrows/Ctrl/Alt.
