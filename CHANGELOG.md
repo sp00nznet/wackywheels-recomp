@@ -14,8 +14,25 @@ All notable changes to this project are documented here. The format follows
   recomp-launcher; a netlab recipe, `wackywheels-recomp`.
 - `docs/architecture.md`; `LICENSES/Zlib-blast.txt` for the `blast.c` port.
 
+- It races: Mode X in pcrecomp's `dos32` (branch `pcrecomp-dos32-modex`),
+  the keyboard table in `WACKY.CFG` (`tools/make_cfg.py`), `--keys` holds
+  (`key+S`) and raw scancodes. A Bronze Wheels race on track 1 with the
+  keyboard.
+- `Setup.cmd` takes a `.cue`/`.bin` image (`tools/cue2iso.py`).
+- `CONTRIBUTING.md`, `CONTRIBUTORS.md`, `docs/building.md`, `docs/testing.md`.
+- `setup.sh`, which says there is no Linux or macOS build yet and stops.
+
 ### Changed
-- README rewritten in the pcrecomp house style.
+- README in the house order (Getting Started, Status, Screenshots,
+  Documentation, Contributors, License); the step-by-step build and the
+  command line moved to `docs/building.md` and `docs/testing.md`.
+- Setup and the launcher clone pcrecomp's `pcrecomp-dos32-modex` branch: on
+  `main` there is no Mode X and the screen is wrong.
+- `NOTICE` is now `NOTICE.md`, with a third-party table.
+
+### Fixed
+- `LICENSE` is plain MIT again: another project's notice had been appended to
+  it.
 - `build.cmd`'s comment names the real default toolkit path, `..\pcrecomp`.
 
 ## [0.1.0] - 2026-11-08

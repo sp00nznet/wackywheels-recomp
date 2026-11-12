@@ -3,15 +3,30 @@
   "repo": "sp00nznet/wackywheels-recomp",
   "accent": "#e07020",
   "note": {
-    "default": "The build takes about 5 minutes and 1 GB. Python (with pefile and capstone) and the Visual Studio Build Tools with clang-cl (about 4 GB, 15 to 30 minutes more) are installed if they are missing. Choose the CD rerelease's drive, a folder holding WW_REGUP._1 and ._2, or an .iso. Early: it boots to the menus, but the screen is not right yet."
+    "default": "The build takes about 5 minutes and 1 GB. Python (with pefile and capstone) and the Visual Studio Build Tools with clang-cl (about 4 GB, 15 to 30 minutes more) are installed if they are missing. Choose the CD rerelease's drive, a folder holding WW_REGUP._1 and ._2, an .iso, or a .cue/.bin image. Alpha: it races, with the keyboard and no sound yet."
   },
   "game": {
     "name": "Wacky Wheels",
-    "files": ["WW_REGUP._1|ww_regup._1|*.iso"]
+    "files": [
+      "WW_REGUP._1|ww_regup._1|*.iso|*.cue"
+    ]
   },
-  "sources": [{ "repo": "sp00nznet/pcrecomp", "ref": "main", "dir": "pcrecomp" }],
+  "sources": [
+    {
+      "repo": "sp00nznet/pcrecomp",
+      "ref": "pcrecomp-dos32-modex",
+      "dir": "pcrecomp"
+    }
+  ],
   "setup": {
-    "default": ["cmd", "/c", "Setup.cmd", "-Yes", "-GameDir", "{game}"]
+    "default": [
+      "cmd",
+      "/c",
+      "Setup.cmd",
+      "-Yes",
+      "-GameDir",
+      "{game}"
+    ]
   },
   "play": "Wacky Wheels.lnk"
 }

@@ -4,7 +4,11 @@ The two parts are one stream of records: a 32-byte header (a Pascal string,
 the file name, padded with zeros; its last byte is also the first byte of the
 data) and the file, PKWARE DCL "implode" compressed, which ends with its own
 end code. The next record follows straight after. This is a port of
-blast.c (Mark Adler, zlib contrib, zlib licence) to decode them.
+blast.c (Mark Adler, zlib contrib, zlib license) to decode them.
+
+The blast() decoder below is an altered version of blast.c 1.3:
+  Copyright (C) 2003, 2012, 2013 Mark Adler
+  zlib license, full text in LICENSES/Zlib-blast.txt; see NOTICE.md.
 
     py -3 tools/unpack_regup.py <CD folder> game
 """
