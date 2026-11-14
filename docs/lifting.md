@@ -30,7 +30,7 @@ and + 0x2DC are the music and effects devices, -1 for none.
 
 The game switches the VGA to unchained mode and draws with the Map Mask, four
 pixels per byte address, and copies through the latches (write mode 1). It is
-done in pcrecomp's `dos32` (branch `pcrecomp-dos32-modex`): the window at
+done in pcrecomp's `dos32`: the window at
 A0000 holds one plane at a time and is swapped on Map Mask and Read Map
 writes; latch copies come through `recomp_rep_movs`, which the build opts into
 with `RECOMP_DOS32_VGA`; the scanout follows the CRTC start address.

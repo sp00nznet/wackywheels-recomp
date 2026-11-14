@@ -14,7 +14,7 @@
   "sources": [
     {
       "repo": "sp00nznet/pcrecomp",
-      "ref": "pcrecomp-dos32-modex",
+      "ref": "main",
       "dir": "pcrecomp"
     }
   ],

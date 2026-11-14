@@ -8,7 +8,7 @@ Park runs on) answers DOS, DPMI, the BIOS, the VGA (Mode X included), the
 timer and the keyboard. No emulator, no DOSBox.
 
 Built on the [pcrecomp](https://github.com/sp00nznet/pcrecomp) toolchain, on
-its **`pcrecomp-dos32-modex`** branch (Mode X; not merged into `main` yet).
+its `main` branch.
 The lift driver and the build come from the
 [Theme Park recomp](https://github.com/sp00nznet/themepark-recomp).
 
@@ -31,8 +31,7 @@ copy.
 3. Play with the **`Wacky Wheels`** shortcut in that folder.
 
 The script checks for Python 3.10+ (with `pefile` and `capstone`), Git, the
-pcrecomp toolkit (cloned beside this folder on its `pcrecomp-dos32-modex`
-branch) and Visual Studio 2022 with clang-cl, and asks before installing any of
+pcrecomp toolkit (cloned beside this folder) and Visual Studio 2022 with clang-cl, and asks before installing any of
 them. It finds the CD in your drives or asks where it is (a drive, a folder, an
 `.iso`, which it mounts, or a `.cue`, whose data track it turns into
 `work\disc.iso`; `Setup.cmd -GameDir E:\` skips the question, `-Yes` answers
@@ -56,7 +55,7 @@ and a Bronze Wheels race on track 1, driven with the keyboard.
 | Lift (`run_lift.py`) | 2,342 functions, 0 errors |
 | Host (`build/wackywheels.exe`, 64-bit, clang-cl, pcrecomp `dos32`) | builds |
 | Config, start-up, the Beavis Soft logo, the title, the menus | ✅ |
-| The screen | ✅ Mode X (unchained VGA), pcrecomp branch `pcrecomp-dos32-modex` |
+| The screen | ✅ Mode X (unchained VGA), pcrecomp `dos32` |
 | Racing, input | ✅ a race with the keyboard; the skyline does not scroll when turning yet |
 | Sound | off (`WACKY.CFG` says no music, no effects) |
 | Headless mode | `--headless`, `--seconds`, `--shot`, `--keys`; no `--record` yet |

@@ -23,6 +23,7 @@ All notable changes to this project are documented here. The format follows
 - `setup.sh`, which says there is no Linux or macOS build yet and stops.
 
 ### Changed
+- Builds against pcrecomp main; the `pcrecomp-dos32-modex` branch is merged.
 - README in the house order (Getting Started, Status, Screenshots,
   Documentation, Contributors, License); the step-by-step build and the
   command line moved to `docs/building.md` and `docs/testing.md`.

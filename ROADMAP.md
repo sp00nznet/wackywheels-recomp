@@ -1,8 +1,6 @@
 # Roadmap
 
 ## Next
-- Merge pcrecomp's `pcrecomp-dos32-modex` (Mode X) into `main`, and point
-  Setup and the launcher back at `main`.
 - The skyline does not scroll when the kart turns; find out what draws it.
 - A whole race to the finish, the other cups, two-player split screen.
 - A conformance harness (REPO_RULES section 9): boot, title, menus, a race

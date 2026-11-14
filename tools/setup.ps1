@@ -12,7 +12,7 @@
 #   -GameDir <drive, folder, .iso or .cue>   skip the question (-Game works too)
 #   -Yes                               answer yes to every install question
 #
-# The toolkit is ..\pcrecomp on its pcrecomp-dos32-modex branch (PCRECOMP overrides it). Under recomp-launcher
+# The toolkit is ..\pcrecomp (main) (PCRECOMP overrides it). Under recomp-launcher
 # (RECOMP_LAUNCHER=1) it never waits for Enter, and exit code 0 means the
 # shortcut is there.
 param([switch]$Force, [switch]$Yes, [Alias('Game')][string]$GameDir = "")
@@ -105,7 +105,7 @@ if (-not (Test-Path (Join-Path $Toolkit 'tools\lift\lift32.py'))) {
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) { Fail "Git did not install. Install Git for Windows yourself." }
   }
   if (-not (Ask "  Download it now (git, about 20 MB)?")) { Fail "pcrecomp is required at $Toolkit." }
-  Run "Cloning pcrecomp" @('git', 'clone', '--depth', '1', '--branch', 'pcrecomp-dos32-modex', 'https://github.com/sp00nznet/pcrecomp', $Toolkit)
+  Run "Cloning pcrecomp" @('git', 'clone', '--depth', '1', 'https://github.com/sp00nznet/pcrecomp', $Toolkit)
 }
 Say "  pcrecomp: $Toolkit"
 

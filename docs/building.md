@@ -7,12 +7,11 @@
 Prerequisites: Windows 10/11, **Python 3.10+** (`py -3 --version`), **git**,
 **Visual Studio 2022** (or its Build Tools) with *Desktop development with
 C++* and *C++ Clang tools for Windows* (clang-cl), and the pcrecomp toolkit
-cloned **beside** this repository as `pcrecomp`, on its `pcrecomp-dos32-modex`
-branch (Mode X; not merged into `main` yet):
+cloned **beside** this repository as `pcrecomp` (`main`):
 
 ```
 some-folder\
-  pcrecomp\                     <- git clone -b pcrecomp-dos32-modex https://github.com/sp00nznet/pcrecomp
+  pcrecomp\                     <- git clone https://github.com/sp00nznet/pcrecomp
   wackywheels\                  <- this repository
 ```
 
