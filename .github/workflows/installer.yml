@@ -1,9 +1,12 @@
-# The installer for this commit (recomp-launcher with launcher/launcher.json).
-# The game itself is never in it: the installer builds from the player's own
-# copy. A private repo: run by hand only (REPO_RULES section 8).
+# The installer for this commit (recomp-launcher with launcher/launcher.json):
+# an artifact on every push to main, a release file on a v* tag. It holds no
+# game code: it builds from the player's own copy.
 name: installer
 
 on:
+  push:
+    branches: [main]
+    tags: ["v*"]
   workflow_dispatch:
 
 permissions:
